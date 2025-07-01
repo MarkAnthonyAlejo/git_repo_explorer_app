@@ -1,12 +1,15 @@
 import express from 'express';
+import dotenv from 'dotenv';
+import userRoutes from './routes/userRoutes';
+
+dotenv.config();
 
 const app = express();
+app.use(express.json());
+
+app.use('/users', userRoutes);
+
 const PORT = process.env.PORT || 8000;
-
-app.get('/', (req, res) => {
-  res.send('BackEnd up and running');
-});
-
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
