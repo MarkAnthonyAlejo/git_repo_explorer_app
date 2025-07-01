@@ -19,7 +19,7 @@ export default function SignupPage() {
     e.preventDefault();
 
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users/register`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users/registerUser`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
