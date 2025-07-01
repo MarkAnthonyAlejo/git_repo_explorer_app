@@ -6,20 +6,40 @@ const JWT_SECRET = process.env.JWT_SECRET as string;
 
 export const login = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
-    const { email, password } = req.body;
+    const { email, password, username } = req.body;
 
-    if (!email || !password) {
-       res.status(400).json({ error: 'Email and password are required' });
+    if ((!email && !username) || !password) {
+      res.status(400).json({ error: 'Email or username and password are required' });
+      return;
     }
 
+    let userEmail = email;
+
+    // If username provided instead of email, look up email by username in your users table
+    if (!email && username) {
+      const { data: usersData, error: usersError } = await supabase
+        .from('users')
+        .select('email')
+        .eq('username', username)
+        .single();
+
+      if (usersError || !usersData) {
+        res.status(401).json({ error: 'Invalid username or password' });
+        return;
+      }
+
+      userEmail = usersData.email;
+    }
+
+    // Now sign in with the resolved email
     const { data, error } = await supabase.auth.signInWithPassword({
-      email,
+      email: userEmail!,
       password,
     });
 
     if (error || !data || !data.user) {
       res.status(401).json({ error: error?.message || 'Login failed' });
-      return
+      return;
     }
 
     const token = jwt.sign(
@@ -32,14 +52,13 @@ export const login = async (req: Request, res: Response, next: NextFunction): Pr
       { expiresIn: '7d' }
     );
 
-
     res.status(200).json({
       message: 'Login successful',
       user: data.user,
       token,
     });
   } catch (err) {
-   res.status(500).json({message: 'Login failed', err})
+    res.status(500).json({ message: 'Login failed', err });
   }
 };
 

@@ -17,6 +17,13 @@ export default function LoginPage() {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Simple frontend validation: require at least email or username and password
+    if (!formData.password || (!formData.email && !formData.username)) {
+      alert('Please enter your password and either email or username.');
+      return;
+    }
+
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users/login`, {
         method: 'POST',
@@ -32,8 +39,10 @@ export default function LoginPage() {
       }
 
       alert('Login successful');
-      // localStorage.setItem('token', data.token);
-      // router.push('/dashboard');
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('user', JSON.stringify(data.user));
+
+      router.push('/homePage');
     } catch (err) {
       console.error('Login error:', err);
       alert('Something went wrong');
@@ -50,10 +59,10 @@ export default function LoginPage() {
             <input
               type="email"
               name="email"
-              required
               value={formData.email}
               onChange={handleChange}
               className="mt-1 block w-full rounded-md border px-3 py-2 shadow-sm focus:outline-none focus:ring focus:border-blue-500"
+              placeholder="Enter email or leave blank"
             />
           </div>
           <div>
@@ -64,6 +73,7 @@ export default function LoginPage() {
               value={formData.username}
               onChange={handleChange}
               className="mt-1 block w-full rounded-md border px-3 py-2 shadow-sm focus:outline-none focus:ring focus:border-blue-500"
+              placeholder="Enter username or leave blank"
             />
           </div>
           <div>
@@ -75,6 +85,7 @@ export default function LoginPage() {
               value={formData.password}
               onChange={handleChange}
               className="mt-1 block w-full rounded-md border px-3 py-2 shadow-sm focus:outline-none focus:ring focus:border-blue-500"
+              placeholder="Enter your password"
             />
           </div>
           <button
