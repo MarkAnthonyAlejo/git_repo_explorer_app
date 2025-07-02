@@ -12,6 +12,10 @@ app.use(cors({
   credentials: true,
 }));
 
+app.get('/', (req, res) => {
+  res.send('Git Repo Explorer Backend is Running ✅');
+});
+
 app.use(express.json());
 app.use('/users', userRoutes);
 
