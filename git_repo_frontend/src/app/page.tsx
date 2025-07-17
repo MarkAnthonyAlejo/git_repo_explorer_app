@@ -62,7 +62,7 @@ export default function LoginPage() {
               value={formData.email}
               onChange={handleChange}
               className="mt-1 block w-full rounded-md border px-3 py-2 shadow-sm focus:outline-none focus:ring focus:border-blue-500"
-              placeholder="Enter email or leave blank"
+              placeholder="Enter email"
             />
           </div>
           <div>
@@ -73,7 +73,7 @@ export default function LoginPage() {
               value={formData.username}
               onChange={handleChange}
               className="mt-1 block w-full rounded-md border px-3 py-2 shadow-sm focus:outline-none focus:ring focus:border-blue-500"
-              placeholder="Enter username or leave blank"
+              placeholder="Enter username"
             />
           </div>
           <div>
