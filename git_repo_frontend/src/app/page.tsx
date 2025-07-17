@@ -23,7 +23,7 @@ export default function LoginPage() {
       alert('Please enter your password and either email or username.');
       return;
     }
-
+    console.log(process.env.NEXT_PUBLIC_API_BASE_URL,'Testing')
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users/login`, {
         method: 'POST',
