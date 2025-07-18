@@ -56,25 +56,26 @@ export default function LoginPage() {
   };
 
   return (
-    <main className="min-h-screen bg-gray-100 flex flex-col items-center justify-center">
+    <main style={{backgroundColor: '#000409'}} className="min-h-screen bg-gray-100 flex flex-col items-center justify-center">
       {/* GitHub-style dark header */}
       <div className="w-full bg-gray-900 py-4">
         <h1 className="text-white text-center text-2xl font-semibold">GitRepo Explorer</h1>
       </div>
 
       {/* Login card */}
-      <div className="w-full max-w-sm mt-8 bg-white border border-gray-200 p-8 rounded-lg shadow-lg">
-        <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">Sign in to your account</h2>
+      <div style={{borderColor: '#3D444D', backgroundColor: '#0C1117'}} className="w-full max-w-sm mt-8 bg-white border-4 border-custom-border p-8 rounded-lg shadow-lg">
+        <h2 style={{color:'#F0F6FD'}} className="text-2xl font-bold text-center mb-6 text-gray-800">Sign in to your account</h2>
 
         <form onSubmit={handleLogin} className="space-y-4">
           {/* Email input */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">Email</label>
+            <label style={{color:'#F0F6FD'}} className="block text-sm font-medium text-gray-700">Email</label>
             <input
               type="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
+              style={{color:'#F0F6FD'}} 
               className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="you@example.com"
             />
@@ -82,12 +83,13 @@ export default function LoginPage() {
 
           {/* Username input */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">Username</label>
+            <label style={{color:'#F0F6FD'}} className="block text-sm font-medium text-gray-700">Username</label>
             <input
               type="text"
               name="username"
               value={formData.username}
               onChange={handleChange}
+              style={{color:'#F0F6FD'}} 
               className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="username"
             />
@@ -95,13 +97,14 @@ export default function LoginPage() {
 
           {/* Password input */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">Password</label>
+            <label style={{color:'#F0F6FD'}}  className="block text-sm font-medium text-gray-700">Password</label>
             <input
               type="password"
               name="password"
               required
               value={formData.password}
               onChange={handleChange}
+              style={{color:'#F0F6FD'}} 
               className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="••••••••"
             />
@@ -111,6 +114,7 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={loading}
+            style={{backgroundColor: '#228736', color:'#F0F6FD'}}
             className={`w-full flex justify-center items-center bg-blue-600 text-white font-semibold py-2 px-4 rounded hover:bg-blue-700 transition ${
               loading ? 'opacity-70 cursor-not-allowed' : ''
             }`}
@@ -141,11 +145,12 @@ export default function LoginPage() {
           </button>
         </form>
 
-        <p className="mt-6 text-center text-sm text-gray-600">
+        <p style={{color:'#F0F6FD'}}  className="mt-6 text-center text-sm text-gray-600">
           Don&apos;t have an account?{' '}
           <button
             onClick={() => router.push('/signupPage')}
             className="text-blue-600 hover:underline"
+            style={{color: '#4493F8'}}
           >
             Sign up
           </button>
