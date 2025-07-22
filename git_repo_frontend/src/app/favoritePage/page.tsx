@@ -26,25 +26,25 @@ export default function FavoritePage() {
   }, []);
 
   return (
-    <main className="min-h-screen p-6 bg-gray-100">
+    <main className="min-h-screen p-6 bg-[#0A1117]">
       <h1 className="text-3xl font-bold mb-6 text-center">Favorite Repositories</h1>
       {error && <p className="text-red-600">{error}</p>}
       <ul>
         {favorites.map((repo: any) => (
           <li
             key={repo.id}
-            className="bg-white p-4 mb-4 rounded shadow"
+            className="bg-[#151B23] p-4 mb-4 rounded shadow border border-[#3D444D]"
           >
             <a
               href={repo.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xl font-semibold text-blue-600 hover:underline"
+              className="text-[#4493F8] text-xl font-semibold text-blue-600 hover:underline"
             >
               {repo.name}
             </a>
             <p>{repo.description || 'No description'}</p>
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-[#F0F6FD]">
               ⭐ Stars: {repo.star_count} | Language: {repo.language || 'N/A'}
             </p>
           </li>
