@@ -82,7 +82,7 @@ export default function HomePage() {
                 <h2 className="text-3xl font-bold mb-4">Search GitHub Repositories</h2>
                 <button
                     onClick={() => router.push('/favoritePage')}
-                    className="mb-4 bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700"
+                    className="mb-4 bg-[#8355CA] text-white px-4 py-2 rounded hover:bg-[#7343b6]"
                 >
                     Favorites
                 </button>
@@ -111,25 +111,25 @@ export default function HomePage() {
                     {repos.map((repo) => (
                         <li
                             key={repo.id}
-                            className="bg-white p-4 mb-4 rounded shadow flex flex-col sm:flex-row sm:justify-between"
+                            className="bg-[#151B23] p-4 mb-4 rounded shadow flex flex-col sm:flex-row sm:justify-between border border-[#3D444D]"
                         >
                             <div>
                                 <a
                                     href={repo.html_url}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="text-xl font-semibold text-blue-600 hover:underline"
+                                    className="text-[#4493F8] text-xl font-semibold hover:underline"
                                 >
                                     {repo.name}
                                 </a>
-                                <p className="text-gray-700">{repo.description || 'No description'}</p>
-                                <p className="text-sm text-gray-500">
+                                <p className="text-[#F0F6FD]">{repo.description || 'No description'}</p>
+                                <p className="text-sm text-[#F0F6FD]">
                                     ⭐ Stars: {repo.stargazers_count} | Language: {repo.language || 'N/A'}
                                 </p>
                             </div>
                             <button
                                 onClick={() => handleSaveFavorite(repo)}
-                                className="mt-4 sm:mt-0 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 self-start sm:self-center"
+                                className="mt-4 sm:mt-0 bg-[#228736] text-white px-4 py-2 rounded hover:bg-green-700 self-start sm:self-center"
                             >
                                 Save
                             </button>
