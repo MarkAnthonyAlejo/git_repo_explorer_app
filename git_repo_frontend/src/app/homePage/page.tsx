@@ -71,7 +71,7 @@ export default function HomePage() {
     };
 
     return (
-        <main className="min-h-screen p-6 bg-gray-100">
+        <main style={{backgroundColor: '#0A1117', color: '#DBF3F5'}} className="min-h-screen p-6 bg-gray-100">
             {/* Welcome message */}
             <div className="mb-8 text-center">
                 <h1 className="text-4xl font-bold">Welcome {username}</h1>
