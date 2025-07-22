@@ -7,7 +7,7 @@ dotenv.config();
 
 const app = express();
 const allowedOrigins = [
-  // 'http://localhost:3000', Testing 
+   'http://localhost:3000',
   'https://git-repo-explorer-app.vercel.app', 
   'https://git-repo-explorer-app-1.onrender.com'
 ];
