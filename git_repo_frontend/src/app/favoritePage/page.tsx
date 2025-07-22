@@ -27,7 +27,7 @@ export default function FavoritePage() {
 
   return (
     <main className="min-h-screen p-6 bg-[#0A1117]">
-      <h1 className="text-3xl font-bold mb-6 text-center">Favorite Repositories</h1>
+      <h1 className="text-[#F0F6FE] text-3xl font-bold mb-6 text-center">Favorite Repositories</h1>
       {error && <p className="text-red-600">{error}</p>}
       <ul>
         {favorites.map((repo: any) => (
@@ -43,7 +43,7 @@ export default function FavoritePage() {
             >
               {repo.name}
             </a>
-            <p>{repo.description || 'No description'}</p>
+            <p className="text-[#F0F6FE]">{repo.description || 'No description'}</p>
             <p className="text-sm text-[#F0F6FD]">
               ⭐ Stars: {repo.star_count} | Language: {repo.language || 'N/A'}
             </p>
