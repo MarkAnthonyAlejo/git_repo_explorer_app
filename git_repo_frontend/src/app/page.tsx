@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { Toaster, toast } from 'react-hot-toast';
+import { FaGithub } from 'react-icons/fa'
 
 export default function LoginPage() {
   const router = useRouter();
@@ -25,7 +27,7 @@ export default function LoginPage() {
       alert('Please enter your password and either email or username.');
       return;
     }
-    
+
     setLoading(true)
 
     try {
@@ -38,86 +40,87 @@ export default function LoginPage() {
       const data = await res.json();
 
       if (!res.ok) {
-        alert(data.error || 'Login failed');
+        toast.error(data.error || 'Login failed');
         return;
       }
 
-      alert('Login successful');
+      toast.success('Login successful');
       localStorage.setItem('token', data.token);
       localStorage.setItem('user', JSON.stringify(data.user));
 
       router.push('/homePage');
     } catch (err) {
       console.error('Login error:', err);
-      alert('Something went wrong');
+      toast.error('Something went wrong');
     } finally {
       setLoading(false)
     }
   };
 
   return (
-    <main style={{backgroundColor: '#000409'}} className="min-h-screen bg-gray-100 flex flex-col items-center justify-center">
-      {/* GitHub-style dark header */}
-      <div className="w-full bg-gray-900 py-4">
-        <h1 className="text-white text-center text-2xl font-semibold">GitRepo Explorer</h1>
+    <main style={{ backgroundColor: '#000409' }} className="min-h-screen flex flex-col items-center justify-center">
+      {/* Toast Notifications */}
+      <Toaster position="top-right" />
+
+      {/* GitHub Icon Header */}
+      <div className="w-full py-4 flex justify-center items-center">
+        <FaGithub style={{ backgroundColor: '#228736' }} className="text-white text-8xl rounded-full" />
       </div>
 
-      {/* Login card */}
-      <div style={{borderColor: '#3D444D', backgroundColor: '#0C1117'}} className="w-full max-w-sm mt-8 bg-white border-4 border-custom-border p-8 rounded-lg shadow-lg">
-        <h2 style={{color:'#F0F6FD'}} className="text-2xl font-bold text-center mb-6 text-gray-800">Sign in to your account</h2>
-
+      {/* Login Card */}
+      <div style={{ borderColor: '#3D444D', backgroundColor: '#0C1117' }} className="w-full max-w-sm mt-8 border-4 p-8 rounded-lg shadow-lg">
+        <h2 style={{ color: '#F0F6FD' }} className="text-2xl font-bold text-center mb-6">Sign in to your account</h2>
         <form onSubmit={handleLogin} className="space-y-4">
           {/* Email input */}
           <div>
-            <label style={{color:'#F0F6FD'}} className="block text-sm font-medium text-gray-700">Email</label>
+            <label style={{ color: '#F0F6FD' }} className="block text-sm font-medium">Email</label>
             <input
               type="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
-              style={{color:'#F0F6FD'}} 
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              style={{ color: '#F0F6FD' }}
+              className="mt-1 block w-full rounded-md px-3 py-2 shadow-sm border border-gray-300 focus:ring-2 focus:ring-blue-500"
               placeholder="you@example.com"
             />
           </div>
 
           {/* Username input */}
           <div>
-            <label style={{color:'#F0F6FD'}} className="block text-sm font-medium text-gray-700">Username</label>
+            <label style={{ color: '#F0F6FD' }} className="block text-sm font-medium">Username</label>
             <input
               type="text"
               name="username"
               value={formData.username}
               onChange={handleChange}
-              style={{color:'#F0F6FD'}} 
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              style={{ color: '#F0F6FD' }}
+              className="mt-1 block w-full rounded-md px-3 py-2 shadow-sm border border-gray-300 focus:ring-2 focus:ring-blue-500"
               placeholder="username"
             />
           </div>
 
           {/* Password input */}
           <div>
-            <label style={{color:'#F0F6FD'}}  className="block text-sm font-medium text-gray-700">Password</label>
+            <label style={{ color: '#F0F6FD' }} className="block text-sm font-medium">Password</label>
             <input
               type="password"
               name="password"
               required
               value={formData.password}
               onChange={handleChange}
-              style={{color:'#F0F6FD'}} 
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              style={{ color: '#F0F6FD' }}
+              className="mt-1 block w-full rounded-md px-3 py-2 shadow-sm border border-gray-300 focus:ring-2 focus:ring-blue-500"
               placeholder="••••••••"
             />
           </div>
 
-          {/* Submit button with loader */}
+          {/* Submit button */}
           <button
             type="submit"
             disabled={loading}
-            style={{backgroundColor: '#228736', color:'#F0F6FD'}}
-            className={`w-full flex justify-center items-center bg-blue-600 text-white font-semibold py-2 px-4 rounded hover:bg-blue-700 transition ${
-              loading ? 'opacity-70 cursor-not-allowed' : ''
-            }`}
+            style={{ backgroundColor: '#228736', color: '#F0F6FD' }}
+            className={`w-full flex justify-center items-center font-semibold py-2 px-4 rounded hover:bg-green-700 transition ${loading ? 'opacity-70 cursor-not-allowed' : ''
+              }`}
           >
             {loading ? (
               <svg
@@ -126,14 +129,7 @@ export default function LoginPage() {
                 fill="none"
                 viewBox="0 0 24 24"
               >
-                <circle
-                  className="opacity-25"
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  stroke="currentColor"
-                  strokeWidth="4"
-                />
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                 <path
                   className="opacity-75"
                   fill="currentColor"
@@ -145,12 +141,12 @@ export default function LoginPage() {
           </button>
         </form>
 
-        <p style={{color:'#F0F6FD'}}  className="mt-6 text-center text-sm text-gray-600">
+        <p style={{ color: '#F0F6FD' }} className="mt-6 text-center text-sm">
           Don&apos;t have an account?{' '}
           <button
             onClick={() => router.push('/signupPage')}
             className="text-blue-600 hover:underline"
-            style={{color: '#4493F8'}}
+            style={{ color: '#4493F8' }}
           >
             Sign up
           </button>
